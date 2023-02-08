@@ -19,15 +19,15 @@ function showTime() {
   hour = hour % 12 || 12;
 
   // Display time
-  time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)} ${amOrPm}`;
+  time.innerHTML = `${hour}<span>:</span>${String(min).padStart(2, 0)}<span>:</span>${String(sec).padStart(2, 0)} ${amOrPm}`;
 		setTimeout(showTime, 1000)
 }
 
 // Add 0 to sec and min
 
-function addZero(n) {
-	return (parseInt(n, 10) < 10 ? '0' : '') + n;
-}
+// function addZero(n) {
+// 	return (parseInt(n, 10) < 10 ? '0' : '') + n;
+// }
 
 // Set background and greeting style
 function setStyles(daytime) {
