@@ -29,24 +29,23 @@ function addZero(n) {
 	return (parseInt(n, 10) < 10 ? '0' : '') + n;
 }
 
-// Set background and greeting
+// Set background and greeting style
+function setStyles(daytime) {
+  document.body.style.backgroundImage = `url('imgs/${daytime}.jpg')`;
+  document.body.style.backgroundRepeat = 'no-repeat';
+  document.body.style.backgroundSize = 'cover';
+  greeting.textContent = `Good ${daytime},`
+}
+
 function setBgAndGreet() {
   let currentHour = new Date().getHours();
+  // let currentHour = 22;
   if(currentHour < 12) {
-    document.body.style.backgroundImage = "url('imgs/morning.jpg')";
-    document.body.style.backgroundRepeat = 'no-repeat';
-    document.body.style.backgroundSize = 'cover';
-    greeting.textContent = 'Good morning,'
+    setStyles('morning');
   } else if(currentHour < 18) {
-    document.body.style.backgroundImage = "url('imgs/afternoon.jpg')";
-    document.body.style.backgroundRepeat = 'no-repeat';
-    document.body.style.backgroundSize = 'cover';
-    greeting.textContent = 'Good afternoon,'
+    setStyles('afternoon');
   } else {
-    document.body.style.backgroundImage = "url('imgs/night.jpg')";
-    document.body.style.backgroundRepeat = 'no-repeat';
-    document.body.style.backgroundSize = 'cover';
-    greeting.textContent = 'Good evening,'
+    setStyles('evening');
     document.body.style.color = 'white';
   }
 }
