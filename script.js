@@ -2,7 +2,7 @@
 
 const time = document.querySelector("#time");
 const greeting = document.querySelector("#greeting");
-const name = document.querySelector("#name");
+const username = document.querySelector("#name");
 const focus = document.querySelector("#focus");
 
 // Show Time
@@ -40,7 +40,7 @@ function setBgAndGreet() {
   } else if(currentHour < 18) {
     document.body.style.backgroundImage = "url('imgs/afternoon.jpg')";
     document.body.style.backgroundRepeat = 'no-repeat';
-    document.body.style.backgroundCover = 'cover';
+    document.body.style.backgroundSize = 'cover';
     greeting.textContent = 'Good afternoon,'
   } else {
     document.body.style.backgroundImage = "url('imgs/night.jpg')";
@@ -51,12 +51,36 @@ function setBgAndGreet() {
   }
 }
 
+// Set Name
+function setName(e) {
+  if(e.type === 'keypress') {
+    if(e.keyCode == 13) {
+      localStorage.setItem('name', e.target.innerText);
+      username.blur();
+    }
+  } else {
+    localStorage.setItem('name', e.target.innerText);
+  }
+}
+
+// Set Focus
+function setFocus(e) {
+  if(e.type === 'keypress') {
+    if(e.keyCode == 13) {
+      localStorage.setItem('focus', e.target.innerText);
+      focus.blur();
+    }
+  } else {
+    localStorage.setItem('focus', e.target.innerText);
+  }
+}
+
 // Get Name
 function getName() {
   if(localStorage.getItem('name') === null) {
-    name.textContent = '[Enter Your Name]';
+    username.textContent = '[Enter Your Name]';
   } else {
-    localStorage.getItem('name');
+    username.textContent = localStorage.getItem('name');
   }
 }
 
@@ -65,9 +89,19 @@ function getFocus() {
   if(localStorage.getItem('focus') === null) {
     focus.textContent = '[Enter Your Focus]';
   } else {
-    localStorage.getItem('focus');
+    focus.textContent = localStorage.getItem('focus');
   }
 }
+
+username.addEventListener('keypress', setName);
+username.addEventListener('blur', setName);
+
+focus.addEventListener('keypress', setFocus);
+focus.addEventListener('blur', setFocus);
+
+
+
+
 
 // Run
 showTime();
