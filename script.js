@@ -39,7 +39,6 @@ function setStyles(daytime) {
 
 function setBgAndGreet() {
   let currentHour = new Date().getHours();
-  // let currentHour = 22;
   if(currentHour < 12) {
     setStyles('morning');
   } else if(currentHour < 18) {
@@ -50,15 +49,27 @@ function setBgAndGreet() {
   }
 }
 
+// Set interface
+// function setInterface(e) {
+//   if(e.type === 'keypress') {
+//     if(e.keyCode == 13) {
+//       localStorage.setItem(element, e.target.innerText);
+//       username.blur();
+//     }
+//   } else {
+//     localStorage.setItem(element, e.target.innerText);
+//   }
+// }
+
 // Set Name
 function setName(e) {
   if(e.type === 'keypress') {
     if(e.keyCode == 13) {
-      localStorage.setItem('name', e.target.innerText);
+      localStorage.setItem('username', e.target.innerText);
       username.blur();
     }
   } else {
-    localStorage.setItem('name', e.target.innerText);
+    localStorage.setItem('username', e.target.innerText);
   }
 }
 
@@ -76,10 +87,10 @@ function setFocus(e) {
 
 // Get Name
 function getName() {
-  if(localStorage.getItem('name') === null) {
+  if(localStorage.getItem('username') === null) {
     username.textContent = '[Enter Your Name]';
   } else {
-    username.textContent = localStorage.getItem('name');
+    username.textContent = localStorage.getItem('username');
   }
 }
 
@@ -92,15 +103,16 @@ function getFocus() {
   }
 }
 
-username.addEventListener('keypress', setName);
-username.addEventListener('blur', setName);
+// Event listeners setting name and focus
+['keypress', 'blur'].forEach(ev => {
+  username.addEventListener(ev, setName);
+  focus.addEventListener(ev, setFocus);
+})
 
-focus.addEventListener('keypress', setFocus);
-focus.addEventListener('blur', setFocus);
-
-
-
-
+// username.addEventListener('keypress', setName);
+// username.addEventListener('blur', setName);
+// focus.addEventListener('keypress', setFocus);
+// focus.addEventListener('blur', setFocus);
 
 // Run
 showTime();
