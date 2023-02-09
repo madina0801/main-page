@@ -4,6 +4,9 @@ const time = document.querySelector("#time");
 const greeting = document.querySelector("#greeting");
 const username = document.querySelector("#name");
 const focus = document.querySelector("#focus");
+const quoteContent = document.querySelector("#quote__content");
+const quoteAuthor = document.querySelector("#quote__author")
+
 
 // Show Time
 
@@ -109,10 +112,33 @@ function getFocus() {
   focus.addEventListener(ev, setFocus);
 })
 
-// username.addEventListener('keypress', setName);
-// username.addEventListener('blur', setName);
-// focus.addEventListener('keypress', setFocus);
-// focus.addEventListener('blur', setFocus);
+// Get Quotes
+// API https://api.quotable.io/random/?tags=inspirational
+async function getQuote() {
+  const quoteApi = 'https://api.quotable.io/random/?tags=inspirational&maxLength=90';
+  const response = await fetch(quoteApi);
+  const data = await response.json();
+  console.log(data.content);
+  console.log(data.author);
+  console.log(data);
+  quoteContent.textContent = data.content;
+  quoteAuthor.textContent = `— ${data.author}`;
+}
+
+getQuote()
+
+// export const getJSON = async function (url) {
+//   try {
+//     const res = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]);
+//     const data = await res.json();
+//     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+
+//     return data;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
+
 
 // Run
 showTime();
