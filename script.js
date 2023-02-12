@@ -118,14 +118,10 @@ async function getQuote() {
   const quoteApi = 'https://api.quotable.io/random/?tags=inspirational&maxLength=90';
   const response = await fetch(quoteApi);
   const data = await response.json();
-  console.log(data.content);
-  console.log(data.author);
-  console.log(data);
   quoteContent.textContent = data.content;
   quoteAuthor.textContent = `— ${data.author}`;
 }
 
-getQuote()
 
 // export const getJSON = async function (url) {
 //   try {
@@ -141,6 +137,7 @@ getQuote()
 
 
 // Run
+getQuote();
 showTime();
 setBgAndGreet();
 getName();
